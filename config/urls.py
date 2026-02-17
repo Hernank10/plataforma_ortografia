@@ -14,12 +14,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
 from django.contrib import admin
-from django.urls import path
-from ejercicios.views import juego_ortografia
+from django.urls import path, include
+from ejercicios.views import juego_ortografia, inicio # <--- IMPORTANTE: Ambas aquí
 
 urlpatterns = [
-    path('admin/', admin.site.sender),
+    path('admin/', admin.site.urls), # Corregido de 'sender' a 'urls'
+    path('i18n/', include('django.conf.urls.i18n')),
+    path('', inicio, name='inicio'),
     path('juego/', juego_ortografia, name='juego'),
 ]
+
+
